@@ -1,3 +1,12 @@
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "tstate"
+    storage_account_name = "tstatesasergey"
+    container_name       = "tsate"
+    key                  = "terraform.tfstate"
+  }
+}
+
 provider "azurerm" {
   version = "=2.0.0"
   features { }  
@@ -20,20 +29,27 @@ resource "azurerm_sql_server" "server" {
     environment = "chalenge 2"
   }
 }
+resource "azurerm_sql_firewall_rule" "db_server_fw" {
+  name                = "AllowAccessAzureService"
+  resource_group_name = azurerm_resource_group.rg.name
+  server_name         = azurerm_sql_server.server.name
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "0.0.0.0"
+}
 
 resource "azurerm_sql_database" "db" {
-  name                = "mysqldatabase"
+  name                = "mysqldatabase3"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   server_name         = azurerm_sql_server.server.name  
 }
 
 resource "azurerm_container_group" "main" {
-  name                  = "mongodbnamesergeynet"
+  name                  = "mongodbnamesergeynet3"
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   ip_address_type       = "public"
-  dns_name_label        = "aci-label-sergey-net"
+  dns_name_label        = "aci-label-sergey-net3"
   os_type               = "Linux"
 
   container {

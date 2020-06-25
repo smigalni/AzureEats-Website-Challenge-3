@@ -1,12 +1,48 @@
-name: Web regular AppService
+name: 'Terraform Challenge 3'
 
 on:
   push:
     branches:
-      - master
+    - master
 
 jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: azure/login@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+
+    - name: Create Variables file
+      env:
+        TFVARS: ${{ secrets.TFVARS_CHALLENGE }}
+      run: 'echo "$TFVARS" > terraform.tfvars'
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: terraform init
+      
+    - name: Terraform Validate
+      run: terraform validate
+    
+    - name: Terraform Plan
+      run: terraform plan -out tfplan
+    
+    - name: Terraform Apply
+      run: terraform apply -auto-approve tfplan 
+
+    - name: Azure logout
+      run: |
+        az logout
+
   build-and-deploy:
+    name: 'Build and Deploy Web App'
     runs-on: ubuntu-latest
     steps:
 
