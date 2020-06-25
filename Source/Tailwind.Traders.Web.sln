@@ -7,11 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tailwind.Traders.Web", "Tai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D733886-D444-4FC7-BC44-35ABE5A48F08}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\aks.yaml = ..\.github\workflows\aks.yaml
-		..\.github\workflows\container_appservice.yaml = ..\.github\workflows\container_appservice.yaml
-		..\.github\workflows\pr_build_check.yaml = ..\.github\workflows\pr_build_check.yaml
-		..\.github\workflows\readme.md = ..\.github\workflows\readme.md
-		..\.github\workflows\regular_appservice.yaml = ..\.github\workflows\regular_appservice.yaml
+		..\.github\workflows\challenge3Terraform.yaml = ..\.github\workflows\challenge3Terraform.yaml
 	EndProjectSection
 EndProject
 Global
